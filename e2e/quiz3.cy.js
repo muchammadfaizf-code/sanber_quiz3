@@ -37,7 +37,19 @@ describe('OrangeHRM Login Feature', () => {
     cy.get('.oxd-input-group > .oxd-text').should('contain', 'Required');
   });
 
-  it('TC06 - Login dengan username valid + password valid lalu refresh halaman', () => {
+  it('TC06 - Navigasi ke halaman pemulihan password', () => {
+  cy.get('.orangehrm-login-forgot > .oxd-text').click();
+  cy.url().should('include', '/requestPasswordResetCode');
+  });
+
+  it('TC07 - Cek sensitivitas huruf pada kredensial', () => {
+    cy.get('input[name="username"]').type('ADMIN');
+    cy.get('input[name="password"]').type('admin123');
+    cy.get('button[type="submit"]').click();
+    cy.url().should('include', '/dashboard');
+  });
+
+  it('TC08 - Validasi refresh halaman terlogin', () => {
   // Login dengan kredensial valid
   cy.get('input[name="username"]').type('Admin');
   cy.get('input[name="password"]').type('admin123');
@@ -52,25 +64,12 @@ describe('OrangeHRM Login Feature', () => {
   cy.get('.oxd-topbar-header-breadcrumb').should('contain', 'Dashboard');
 });
 
-
-  it('TC07 - Login dengan huruf kapital di username', () => {
-    cy.get('input[name="username"]').type('ADMIN');
-    cy.get('input[name="password"]').type('admin123');
-    cy.get('button[type="submit"]').click();
-    cy.url().should('include', '/dashboard');
-  });
-
-  it('TC08 - Semua field kosong', () => {
+  it('TC09 - Semua field kosong', () => {
     cy.get('button[type="submit"]').click();
     cy.get(':nth-child(3) > .oxd-input-group > .oxd-text').should('contain', 'Required');
   });
 
-  it('TC09 - Login valid lalu cek URL dashboard', () => {
-  cy.get('input[name="username"]').type('Admin');
-  cy.get('input[name="password"]').type('admin123');
-  cy.get('button[type="submit"]').click();
-  cy.url().should('include', '/dashboard/index');
-  });
+
 
 
   it('TC10 - Password dengan spasi', () => {
