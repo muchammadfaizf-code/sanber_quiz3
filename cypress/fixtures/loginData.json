@@ -1,0 +1,9 @@
+{
+  "validUser": { "username": "Admin", "password": "admin123" },
+  "invalidUser": { "username": "WrongUser", "password": "admin123" },
+  "invalidPass": { "username": "Admin", "password": "wrongPass" },
+  "emptyUser": { "username": "", "password": "admin123" },
+  "emptyPass": { "username": "Admin", "password": "" },
+  "caseSensitive": { "username": "ADMIN", "password": "admin123" },
+  "spacePass": { "username": "Admin", "password": "   admin123   " }
+}
